@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+* {
+  font-family: 'Sora', sans-serif;
+}
+
+.parent {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+grid-template-rows: repeat(7, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+div.heading{
+	font-size: 100px;
+	text-align: center;
+}
+
+div.smol {
+	font-size: large;
+	text-align: center;
+}
+
+.div1 { grid-area: 3 / 2 / 6 / 3; }
+.div2 { grid-area: 3 / 4 / 6 / 5; }
+.div3 { grid-area: 3 / 6 / 6 / 7; }
+.div4 { grid-area: 1 / 1 / 3 / 8; }
+.div5 { grid-area: 3 / 1 / 6 / 2; }
+.div6 { grid-area: 3 / 3 / 6 / 4; }
+.div7 { grid-area: 3 / 5 / 6 / 6; }
+.div8 { grid-area: 3 / 7 / 6 / 8; }

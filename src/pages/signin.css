@@ -1,0 +1,68 @@
+.div-signin{
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 10vh;
+    background-color: white;
+}
+
+.card {
+  margin: auto;
+  margin-top: 200px;
+  width: 50%;
+  background-color: #fff;
+  padding: 10px;
+}
+
+input{
+    width: 80%;
+    border: 1px solid #dbdbdb;
+    padding: 5px;
+    margin: 2px 0;
+    border-radius: 5px;
+    background-color: #fafafa;
+    box-shadow: none;
+}
+
+table {
+  width: 100%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+thead {
+    background-color: #bfcfff;
+}
+
+td {
+    border: 1px solid black;
+}
+
+tr {
+    border: 1px solid black;
+    padding-left: 5px;
+}
+
+Button {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.r {
+    background-color: red;
+}
+
+.g {
+    background-color: green;
+}
+
+.b {
+    background-color: blue;
+}

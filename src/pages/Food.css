@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css?family=Grand+Hotel:400|Poppins:500,600");
+
+body{
+    background-color: rgba(113, 188, 225, 1);
+    margin :0;
+}
+
+.title {
+    font-family: 'Grand Hotel';
+    color: white;
+    font-size: 60px;
+    text-align: center;
+    font-weight: 500;
+}
+
+ul.navbar {
+  align-items: flex-end;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 4.35px 1.81px 36.25px #5c54542e;
+  display: flex;
+  list-style-type: none;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+}
+
+ul.navbar li {
+    float: left;
+}
+
+ul.navbar li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: poppins;
+}
+
+ul.navbar li a:hover:not(.active) {
+    background-color: rgb(0, 191, 255);
+}
+
+ul.navbar li a.active {
+    background-color: white;
+    float: right;
+}
+
+ul.navbar li.center {
+    float: center;
+    background-color: white;
+    margin-left: auto;
+}
+
+
+ul.navbar li.right {
+    float: right;
+    background-color: white;
+    margin-left: auto;
+}
+
+.footer {
+    position: fixed;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(0, 0, 0);
+ }
+
+ .textSponsor{
+    font-family: 'Poppins';
+    color: rgb(85, 85, 85);
+    font-size: 20px;
+    text-align: left;
+    font-weight: 500;
+    padding-top: auto;
+    padding-bottom: auto;
+ }
+
+
+ .sponsor{
+     list-style-type: none;
+ }
+
+ li{
+     display: inline-block;
+     align-items:left;
+     margin-top: auto;
+     margin-bottom: auto;
+     margin-left: 0;
+     padding-left: 0;
+ }
+ 
+ img{
+    width: 50px;
+    height: 50px;
+    object-fit: scale-down;
+}
+
+div.gallery {
+    border: 1px solid #ccc;
+    background-color: #ffa49e;
+    border-radius: 10%;
+  }
+  
+  div.gallery:hover {
+    border: 1px solid rgb(253, 139, 9);
+  }
+  
+  div.gallery img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10%;
+    object-fit:cover;
+    margin-left: auto;
+    margin-right: auto;
+    display:block
+  }
+  
+  div.desc {
+    font-family: 'Poppins';
+    color: rgb(39, 39, 39);
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  * {
+    box-sizing:border-box;
+  }
+  
+  .responsive {
+    padding: 0px;
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .responsive {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .responsive {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .text{
+    font-family: 'Poppins';
+    color: rgb(39, 39, 39);
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+  }
+
+
+
+
