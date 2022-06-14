@@ -96,16 +96,15 @@ ul.navbar li.right {
      padding-left: 0;
  }
  
- img{
-    width: 50px;
-    height: 50px;
+ /* img{
     object-fit: scale-down;
-}
+} */
 
 div.gallery {
     border: 1px solid #ccc;
     background-color: #ffa49e;
     border-radius: 10%;
+    width: auto;
   }
   
   div.gallery:hover {
@@ -113,13 +112,14 @@ div.gallery {
   }
   
   div.gallery img {
-    width: 200px;
+    width: auto;
     height: 200px;
     border-radius: 10%;
     object-fit:cover;
     margin-left: auto;
     margin-right: auto;
-    display:block
+    display: block;
+    overflow: hidden;
   }
   
   div.desc {
@@ -172,7 +172,6 @@ div.gallery {
     text-align: center;
     padding: 10px;
   }
-
 
 
 

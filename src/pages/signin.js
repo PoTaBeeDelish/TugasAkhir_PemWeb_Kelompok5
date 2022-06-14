@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import { Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
 import LoginForm from '../components/LoginForm/LoginForm';
-import './signin.css'
+import './signin.css';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 function Login() {
     let navigate = useNavigate();
@@ -21,24 +20,20 @@ function Login() {
     const Loginin = details => {
         console.log(details);
 
-        if (details.email == adminUser.email && details.password == adminUser.password) {
+        if (details.nama == adminUser.name && details.password == adminUser.password) {
             console.log("Logged in");
-            setUser({
-                name: details.name,
-                password: details.password
-            })
+            sessionStorage.setItem("name", details.name);
+            setUser({name: details.name})
         } else {
-            console.log("AKUN SALAH");
-            setError("AKUN SALAH");
+            {MySwal.fire({
+                icon: 'error',
+                title: 'AKUN SALAH'
+            })}
         }
-    }
-
-    const Logout = () => {
-        setUser({ name: "", email: ""});
     }
     
     const pindah = () => {
-        navigate("/rekomendasi")
+        navigate(-1);
     }
 
     return (
@@ -47,10 +42,12 @@ function Login() {
                 <div className='loginberhasil'>
                 {MySwal.fire({
                     title: 'Berhasil',
-                    text: 'Anda akan diteruskan ke laman',
+                    text: 'Anda akan diteruskan ke laman rekomendasi',
                     icon: 'success',
-                    }).then(() => {
-                        () => pindah();
+                    }).then((result) => {
+                        if(result.isConfirmed){
+                            pindah();
+                        }
                     })
                 }
                 </div>

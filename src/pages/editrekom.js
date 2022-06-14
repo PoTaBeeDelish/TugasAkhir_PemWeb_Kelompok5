@@ -1,131 +1,75 @@
-import Header from './components/Header';
-import Tasks from './components/Tasks';
-import AddTask from './components/AddTask';
-// Importing React Hooks
-import { useState, useEffect } from 'react';
-// Importing Packages
-import { v4 as uuidv4 } from 'uuid';
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react'
+import { Button,Table } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
+const Editrekom = () => {
+  const [users, setUser] = useState([]);
 
-function App() {
-	const [loading, setloading] = useState(true); // Pre-loader before page renders
-    const [tasks, setTasks] = useState([]); // Task State
-    const [showAddTask, setShowAddTask] = useState(false); // To reveal add task form
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-    // Pre-loader
-    useEffect(() => {
-        setTimeout(() => {
-            setloading(false);
-        }, 3500);
-    }, [])
+  const getUsers = async () => {
+    const response = await axios.get("http://localhost:5000/users");
+    setUser(response.data);
+  };
 
-    // Fetching from Local Storage
-    const getTasks = JSON.parse(localStorage.getItem("taskAdded"));
-
-    useEffect(() => {
-        if (getTasks == null) {
-            setTasks([])
-        } else {
-            setTasks(getTasks);
-        }
-        // eslint-disable-next-line
-    }, [])
-
-    // Add Task
-    const addTask = (task) => {
-        const id = uuidv4();
-        const newTask = { id, ...task }
-
-        setTasks([...tasks, newTask]);
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Yay...',
-            text: 'You have successfully added a new task!'
-        })
-
-        localStorage.setItem("taskAdded", JSON.stringify([...tasks, newTask]));
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/users/${id}`);
+      getUsers();
+    } catch (error) {
+      console.log(error);
     }
-
-    // Delete Task
-    const deleteTask = (id) => {
-        const deleteTask = tasks.filter((task) => task.id !== id);
-
-        setTasks(deleteTask);
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Oops...',
-            text: 'You have successfully deleted a task!'
-        })
-
-        localStorage.setItem("taskAdded", JSON.stringify(deleteTask));
-    }
-
-    // Edit Task
-    const editTask = (id) => {
-
-        const text = prompt("Task Name");
-        const day = prompt("Day and Time");
-        let data = JSON.parse(localStorage.getItem('taskAdded'));
-
-        const myData = data.map(x => {
-            if (x.id === id) {
-                return {
-                    ...x,
-                    text: text,
-                    day: day,
-                    id: uuidv4()
-                }
-            }
-            return x;
-        })
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Yay...',
-            text: 'You have successfully edited an existing task!'
-        })
-
-        localStorage.setItem("taskAdded", JSON.stringify(myData));
-        window.location.reload();
-    }
-
+  };
 
   return (
-    <div className="">
-      <Header showForm={() => setShowAddTask(!showAddTask)} changeTextAndColor={showAddTask} />
-      
-      {showAddTask && <AddTask onSave={addTask} />}
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Alamat</th>
-            <th>Deskripsi</th>
-            <th>Lokasi</th>
-            <th>Detail</th>
-          </tr>
-        </thead>
-        <tbody>
-          {persons &&
-            persons.map((person, index) => (
-              <tr>
-                <>
+    
+    <div  style={{margin:'10rem'}}>
+      <Link className="d-grid gap-2 mb-10" to='/create'>
+        <Button className='mb-10' variant="success" size="lg">Create</Button>
+      </Link>
+        <Table striped bordered hover size="sm" className='mt-10'>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Lokasi</th>
+              <th>Deskripsi</th>
+              <th>Gambar</th>
+              <th>Edit Data</th>
+            </tr>
+          </thead>
+          <tbody>
+  
+            {/* Mapping though every element in the array
+            and showing the data in the form of table */}
+            {users.map((user, index) => {
+              return(
+                <tr>
                   <td>{index + 1}</td>
-                  <td>{person.fname}</td>
-                  <td>{person.lname}</td>
-                  <td>{person.age}</td>
+                  <td>{user.nama}</td>
+                  <td>{user.lokasi}</td>
+                  <td>{user.deskripsi}</td>
+                  <td>{user.gambar}</td>
+        
+                  {/* getting theid,Nama, and Lokasi for storing these
+                  value in the jsx with onclick event */}
                   <td>
-                    <Tasks>
+                    <Link to={`edit/${user.id}`}>
+                      <Button variant="info">Update</Button>
+                    </Link>
+                      <Button onClick={() => deleteUser(user.id)} variant="danger">Delete</Button>
                   </td>
-                </>
-              </tr>
-            ))}
-        </tbody>
-      </Table>
-  );
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
+    </div>
+  )
 }
 
-export default App;
+export default Editrekom

@@ -1,35 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Food.css';
-import bakso from '../images/Bakso.jpg';
-import gulaiA from '../images/GulaiAyam.jpg';
-import gulaiK from '../images/GulaiKambing.jpg';
-import kikil from '../images/Kikil.jpg';
-import NasGor from '../images/NasiGoreng.jpg';
-import NasPad from '../images/NasiPadang.jpg';
+import Bakso from '../images/Bakso.jpg';
+import Gulai from '../images/Gulai.jpg';
+import NasiGoreng from '../images/NasiGoreng.jpg';
+import NasiPadang from '../images/NasiPadang.jpg';
 import Rawon from '../images/Rawon.jpg';
+import AyamGeprek from '../images/AyamGeprek.jpg';
+import AyamPenyet from '../images/AyamPenyet.jpg';
+import AyamBakar from '../images/AyamBakar.jpg';
+import Sate from '../images/Sate.jpg';
+import Soto from '../images/Soto.jpg';
+import loggedin from '../components/LoginForm/loggedin';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import withReactContent from 'sweetalert2-react-content';
+import axios from "axios";
 
 const Rekomendasi = () => {
   let navigate = useNavigate();
   const MySwal = withReactContent(Swal);
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState();
 
+  useEffect(() => {
+    getUsers();
+    setUser(localStorage.getItem('Nama'))
+  }, []);
+
+  const getUsers = async () => {
+    const response = await axios.get("http://localhost:5000/users");
+    setUsers(response.data);
+  };
+  
   const Edit = () => {
+    console.log(user.name);
+    if(user.name != ""){
+      console.log("a");
+      navigate("/editrekom");
+    } else {
+      MySwal.fire({
+        title: 'Anda tidak memiliki akses',
+        text: 'Anda harus login terlebih dahulu',
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Kembali',
+        confirmButtonText: 'Login'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/signin");
+        }
+      })
+    }
+  }
 
+  const show = (user) => {
+    const pic = require('../images/'+ user.gambar +'.jpg');
     MySwal.fire({
-      title: 'Anda tidak memiliki akses',
-      text: 'Anda harus login terlebih dahulu',
-      icon: 'error',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Kembali',
-      confirmButtonText: 'Login'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/signin");
-      }
+      title: `${user.nama}`,
+      imageUrl: `${pic}`,
+      html: `Lokasi : ${user.lokasi} <br/> Deskripsi : ${user.deskripsi}`
     })
   }
 
@@ -37,63 +68,17 @@ const Rekomendasi = () => {
     <>
     <button onClick={() => Edit()}>Edit</button>
     <h1 class="title">Food</h1>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/Bakso.jpg">
-            <img src={bakso} alt="Bakso"/>
-          </a>
-          <div class="desc">Bakso</div>
-        </div>
+    {users.map((user, index) => {
+      const image = require('../images/' + user.gambar + '.jpg');
+      return (
+        <div class="responsive">
+        <div class="gallery" onClick={() => show(user)}>
+          <img className='gambar' src={image} alt={user.gambar}/>
+        <div class="desc">{user.nama}</div>
       </div>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/GulaiAyam.jpg">
-            <img src={gulaiA} alt="Gulai Ayam" />
-          </a>
-          <div class="desc">Gulai Ayam</div>
-        </div>
-      </div>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/GulaiKambing.jpg">
-            <img src={gulaiK} alt="Gulai Kambing" />
-          </a>
-          <div class="desc">Gulai Kambing</div>
-        </div>
-      </div>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/Kikil.jpg">
-            <img src={kikil} alt="Kikil"/>
-          </a>
-          <div class="desc">Kikil</div>
-        </div>
-      </div>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/NasiGoreng.jpg">
-            <img src={NasGor} alt="NasiGoreng"/>
-          </a>
-          <div class="desc">Nasi Goreng</div>
-        </div>
-      </div>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/NasiPadang.jpg">
-            <img src={NasPad} alt="NasiPadang" />
-          </a>
-          <div class="desc">Nasi Padang</div>
-        </div>
-      </div>
-      <div class="responsive">
-        <div class="gallery">
-          <a target="_blank" href="../../public/Rawon.jpg">
-            <img src={Rawon} alt="Bakso" />
-          </a>
-          <div class="desc">Rawon</div>
-        </div>
-      </div>
-
+    </div>
+      )
+    })}
       <div class="clearfix"></div>
     </>
   );

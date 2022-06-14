@@ -8,8 +8,36 @@ import {
   NavBtn,
   NavBtnLink
 } from './NavbarElements';
+import { Button } from 'bootstrap';
 
 function Navbar() {
+  
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    setUser(sessionStorage.getItem('Nama'))
+  }, []);
+
+  const logincheck = () => {
+    console.log("test");
+    if(user.name != ""){
+      console.log("gg");
+      return (
+        <NavBtn>
+          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+        </NavBtn>
+      )
+    } else {
+      console.log("ez");
+      return (
+      <Button onClick={Logout}>Logout</Button>
+    )}
+  }
+
+  const Logout = () => {
+    sessionStorage.removeItem("name");
+  }
+
   return (
     <>
       <Nav>
@@ -31,6 +59,9 @@ function Navbar() {
             Rekomendasi
           </NavLink>
           </NavMenu>
+          <NavBtn>
+            <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+          </NavBtn>        
       </Nav>
     </>
   );

@@ -36,6 +36,13 @@ body{
     margin :0;
 }
 
+.main {
+  background-image: url("../images/Backround.png");
+  background-size: cover;
+  background-color: #cccccc;
+  margin :0;
+}
+
 .title {
     font-family: 'Grand Hotel';
     color: white;
@@ -53,21 +60,22 @@ body{
 .cardleft {
   padding: 20px;
   margin-top: 20px;
-  margin-left: 400px;
-  background-color: rgba(170, 170, 170, 0.6);
+  margin-left: 380px;
+  border: 1px solid #ccc;
+  background-color: #ffa49e;
   border-radius: 10px;
   overflow: hidden;
-  height: 200px;
+  height: 300px;
 }
 
 .cardright {
-  padding: 20px;
   margin-top: 20px;
-  margin-right: 400px;
-  background-color: rgba(170, 170, 170, 0.6);
+  margin-right: 380px;
+  border: 1px solid #ccc;
+  background-color: #ffa49e;
   border-radius: 10px;
   overflow: hidden;
-  height: 200px;
+  height: 300px;
 }
 
 ul.navbar {
@@ -153,8 +161,52 @@ ul.navbar li.right {
      padding-left: 0;
  }
  
- img{
-    width: auto;
-    height: 30px;
-    object-fit: scale-down;
+ .bottomrow {
+   margin-top: 50px;
+  float: left;
+  width: 100%;
+  margin-bottom: 50px;
+ }
+ 
+ .bottomcard {
+  margin-left: 380px;
+  margin-right: 380px;
+  border: 1px solid #ccc;
+  background-color: #ffa49e;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 300px;
+ }
+
+ .gambar {
+  height: 300px;
+ }
+
+ .kiri {
+  width: auto;
+  height: 200px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float: left;
+ }
+
+ .center {
+  width: auto;
+  height: 300px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.columnkiri {
+  float: left;
+  height: 300px;
+  width: 400px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.topper {
+  height: 280px;
 }

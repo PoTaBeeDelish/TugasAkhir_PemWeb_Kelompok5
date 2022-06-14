@@ -1,0 +1,39 @@
+.rowberita {
+    margin-top: 40px;
+    margin-right: 400px;
+    margin-left: 400px;
+    background-color: rgba(170, 170, 170, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 200px;
+}
+
+.center {
+    width: auto;
+    height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.columnkiri {
+    float: left;
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.topper {
+    height: 180px;
+}
+
+.verismol {
+    font-size: small;
+    float: right;
+    padding-right: 2px;
+}
+
+.smol{
+    font-size: larger;
+}

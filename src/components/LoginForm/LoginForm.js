@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button } from 'react-bootstrap';
 
 function LoginForm({ Login, error}) {
 	const [details, setDetails] = useState({name: "", password: ""})
+	const [nama, setName] = useState('');
+	const [password, setPassword] = useState('');
 
 	const submitHandler = e =>{
 		e.preventDefault();
 
-		Login(details)
+		setDetails({nama, password});
+		
+		Login(details);
 
 	}
 
 	return (
-		<form onSubmit={submitHandler}> 
-			<div className="form-inner">
-				<h2>Login</h2>
-				{(error != "") ? (<div className="error">{error}</div>) : ""}
-				<div className="form-group">
-					<label htmlFor="name">Username:</label>
-					<input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name} />
-				</div>
-				<div className="form-group">
-					<label htmlFor="password">Password:</label>
-					<input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
-				</div>
-				<input type="submit" value="LOGIN" />
-			</div>
-		</form>
+		<Form className="d-grid gap-2" style={{margin:'15rem'}} onSubmit={submitHandler}>
+			<Form.Label>Login</Form.Label>
+			<Form.Group className="mb-3" controlId="formBasicDescription">
+        		<Form.Control 	onChange={e => setName(e.target.value)} 
+                      			type="text"
+                      			placeholder="username" required/>
+      		</Form.Group>
+			<Form.Group className="mb-3" controlId="formBasicDescription">
+        		<Form.Control 	onChange={e => setPassword(e.target.value)} 
+                      			type="password"
+                      			placeholder="password" required/>
+      		</Form.Group>
+			<Button variant="primary" type="submit">
+        		Submit
+      		</Button>
+		</Form>
 	)
 }
 
