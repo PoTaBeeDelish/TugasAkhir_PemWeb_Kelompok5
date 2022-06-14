@@ -1,0 +1,29 @@
+GET http://localhost:5000/users
+
+###
+GET http://localhost:5000/users/1
+
+###
+POST http://localhost:5000/users 
+Content-Type: application/json
+
+{
+    "nama": "John Doe", 
+    "lokasi": "jl jalan", 
+    "deskripsi": "RM misterius", 
+    "gambar": "ap"
+}
+
+### 
+PATCH http://localhost:5000/users/1 
+Content-Type: application/json
+
+{
+    "nama": "Tes", 
+    "lokasi": "jl kenangan", 
+    "deskripsi": "RM lebih misterius", 
+    "gambar": "ap"
+}
+
+### 
+DELETE http://localhost:5000/users/1
